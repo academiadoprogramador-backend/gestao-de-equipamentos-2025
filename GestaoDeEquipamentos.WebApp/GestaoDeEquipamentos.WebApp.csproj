@@ -7,4 +7,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\GestaoDeEquipamentos.Dominio\GestaoDeEquipamentos.Dominio.csproj" />
+    <ProjectReference Include="..\GestaoDeEquipamentos.Infraestrutura.Arquivos\GestaoDeEquipamentos.Infraestrutura.Arquivos.csproj" />
+  </ItemGroup>
+
 </Project>
