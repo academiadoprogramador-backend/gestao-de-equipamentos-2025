@@ -22,7 +22,6 @@ public class FabricanteController : Controller
         return View(fabricantes);
     }
 
-    [HttpGet]
     public IActionResult Cadastrar()
     {
         return View();
@@ -35,6 +34,51 @@ public class FabricanteController : Controller
 
         repositorioFabricante.CadastrarRegistro(novoFabricante);
 
-        return RedirectToAction("Index");
+        return RedirectToAction(nameof(Index));
+    }
+
+    public IActionResult Editar(int id)
+    {
+        Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(id);
+
+        if (fabricanteSelecionado == null)
+            return RedirectToAction(nameof(Index));
+
+        return View(fabricanteSelecionado);
+    }
+
+    [HttpPost]
+    public IActionResult Editar(int id, string nome, string email, string telefone)
+    {
+        Fabricante fabricanteEditado = new Fabricante(nome, email, telefone);
+
+        bool edicaoConluida = repositorioFabricante.EditarRegistro(id, fabricanteEditado);
+
+        if (!edicaoConluida)
+        {
+            fabricanteEditado.Id = id;
+
+            return View(fabricanteEditado);
+        }
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    public IActionResult Excluir(int id)
+    {
+        Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(id);
+
+        if (fabricanteSelecionado == null)
+            return RedirectToAction(nameof(Index));
+
+        return View(fabricanteSelecionado);
+    }
+
+    [HttpPost]
+    public IActionResult ExcluirConfirmado(int id)
+    {
+        repositorioFabricante.ExcluirRegistro(id);
+
+        return RedirectToAction(nameof(Index));
     }
 }
