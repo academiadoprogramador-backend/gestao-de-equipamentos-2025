@@ -11,6 +11,6 @@
 <ul>
 	@foreach (Fabricante f in Model)
 	{
-		<li>@f.Nome / @f.Email / @f.Telefone</li>
+		<li>@f.Nome / @f.Email / @f.Telefone / <a href="/Fabricante/Editar/@f.Id">Editar</a> / <a href="/Fabricante/Excluir/@f.Id">Excluir</a></li>
 	}
 </ul>

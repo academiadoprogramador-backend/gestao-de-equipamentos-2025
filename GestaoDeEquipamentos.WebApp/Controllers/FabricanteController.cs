@@ -15,6 +15,7 @@ public class FabricanteController : Controller
         repositorioFabricante = new RepositorioFabricanteEmArquivo(contexto);
     }
 
+    [HttpGet]
     public IActionResult Index()
     {
         List<Fabricante> fabricantes = repositorioFabricante.SelecionarRegistros();
@@ -22,7 +23,6 @@ public class FabricanteController : Controller
         return View(fabricantes);
     }
 
-    [HttpGet]
     public IActionResult Cadastrar()
     {
         return View();
@@ -34,6 +34,47 @@ public class FabricanteController : Controller
         Fabricante novoFabricante = new Fabricante(nome, email, telefone);
 
         repositorioFabricante.CadastrarRegistro(novoFabricante);
+
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult Editar(int id)
+    {
+        Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(id);
+
+        if (fabricanteSelecionado is null)
+            return RedirectToAction("Index");
+
+        return View(fabricanteSelecionado);
+    }
+
+    [HttpPost]
+    public IActionResult Editar(int id, string nome, string email, string telefone)
+    {
+        Fabricante fabricanteEditado = new Fabricante(nome, email, telefone);
+
+        var edicaoConcluida = repositorioFabricante.EditarRegistro(id, fabricanteEditado);
+
+        if (!edicaoConcluida)
+            return View(fabricanteEditado);
+
+        return RedirectToAction("Index");
+    }
+
+    public IActionResult Excluir(int id)
+    {
+        Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(id);
+
+        if (fabricanteSelecionado is null)
+            return RedirectToAction("Index");
+
+        return View(fabricanteSelecionado);
+    }
+
+    [HttpPost]
+    public IActionResult ExcluirConfirmado(int id)
+    {
+        repositorioFabricante.ExcluirRegistro(id);
 
         return RedirectToAction("Index");
     }
