@@ -1,6 +1,7 @@
 ﻿using GestaoDeEquipamentos.Dominio.ModuloFabricante;
 using GestaoDeEquipamentos.Infraestrutura.Arquivos.Compartilhado;
 using GestaoDeEquipamentos.Infraestrutura.Arquivos.ModuloFabricante;
+using GestaoDeEquipamentos.WebApp.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestaoDeEquipamentos.WebApp.Controllers;
@@ -19,18 +20,26 @@ public class FabricanteController : Controller
     {
         List<Fabricante> fabricantes = repositorioFabricante.SelecionarRegistros();
 
-        return View(fabricantes);
+        VisualizarFabricantesViewModel visualizarVm = new VisualizarFabricantesViewModel(fabricantes);
+
+        return View(visualizarVm);
     }
 
     public IActionResult Cadastrar()
     {
-        return View();
+        CadastrarFabricanteViewModel cadastrarVm = new CadastrarFabricanteViewModel();
+
+        return View(cadastrarVm);
     }
 
     [HttpPost]
-    public IActionResult Cadastrar(string nome, string email, string telefone)
+    public IActionResult Cadastrar(CadastrarFabricanteViewModel cadastrarVm)
     {
-        Fabricante novoFabricante = new Fabricante(nome, email, telefone);
+        Fabricante novoFabricante = new Fabricante(
+            cadastrarVm.Nome,
+            cadastrarVm.Email,
+            cadastrarVm.Telefone
+        );
 
         repositorioFabricante.CadastrarRegistro(novoFabricante);
 
@@ -44,13 +53,24 @@ public class FabricanteController : Controller
         if (fabricanteSelecionado == null)
             return RedirectToAction(nameof(Index));
 
-        return View(fabricanteSelecionado);
+        EditarFabricanteViewModel editarVm = new EditarFabricanteViewModel(
+            fabricanteSelecionado.Id,
+            fabricanteSelecionado.Nome,
+            fabricanteSelecionado.Email,
+            fabricanteSelecionado.Telefone
+        );
+
+        return View(editarVm);
     }
 
     [HttpPost]
-    public IActionResult Editar(int id, string nome, string email, string telefone)
+    public IActionResult Editar(int id, EditarFabricanteViewModel editarVm)
     {
-        Fabricante fabricanteEditado = new Fabricante(nome, email, telefone);
+        Fabricante fabricanteEditado = new Fabricante(
+            editarVm.Nome,
+            editarVm.Email,
+            editarVm.Telefone
+        );
 
         bool edicaoConluida = repositorioFabricante.EditarRegistro(id, fabricanteEditado);
 
@@ -71,7 +91,10 @@ public class FabricanteController : Controller
         if (fabricanteSelecionado == null)
             return RedirectToAction(nameof(Index));
 
-        return View(fabricanteSelecionado);
+        ExcluirFabricanteViewModel excluirVm =
+            new ExcluirFabricanteViewModel(id, fabricanteSelecionado.Nome);
+
+        return View(excluirVm);
     }
 
     [HttpPost]

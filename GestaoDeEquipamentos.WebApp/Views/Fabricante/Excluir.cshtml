@@ -1,11 +1,12 @@
 ﻿@using GestaoDeEquipamentos.Dominio.ModuloFabricante
+@using GestaoDeEquipamentos.WebApp.Models
 
 @{
     Layout = "_Layout";
     ViewBag.Titulo = "Exclusão de Fabricantes";
 }
 
-@model Fabricante;
+@model ExcluirFabricanteViewModel;
 
 <div class="row justify-content-center">
     <form class="col-6" action="/Fabricante/ExcluirConfirmado/@Model.Id" method="post">

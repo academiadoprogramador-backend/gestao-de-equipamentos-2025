@@ -1,23 +1,26 @@
-﻿@{
+﻿@using GestaoDeEquipamentos.WebApp.Models
+@{
     Layout = "_Layout";
     ViewBag.Titulo = "Cadastro de Fabricantes";
 }
+
+@model CadastrarFabricanteViewModel;
 
 <div class="row justify-content-center">
     <form class="col-6" action="/Fabricante/Cadastrar" method="post">
         <div class="mb-3">
             <label for="Nome" class="form-label">Nome</label>
-            <input class="form-control" name="Nome">
+            <input class="form-control" name="Nome" value="@Model.Nome">
         </div>
 
         <div class="mb-3">
             <label for="Email" class="form-label">Email</label>
-            <input class="form-control" name="Email">
+            <input class="form-control" name="Email" value="@Model.Email">
         </div>
 
         <div class="mb-5">
             <label for="Telefone" class="form-label">Telefone</label>
-            <input class="form-control" name="Telefone">
+            <input class="form-control" name="Telefone" value="@Model.Telefone">
         </div>
 
         <div class="d-flex gap-2 justify-content-end">
