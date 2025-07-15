@@ -7,13 +7,13 @@
     @* Bootstrap Icons *@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-    <title>Título da Página | Gestão de Equipamentos</title>
+    <title>@ViewBag.Titulo | Gestão de Equipamentos</title>
 </head>
 <body data-bs-theme="dark">
     @* Barra de Navegação / Navbar *@
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
         <div class="container">
-            <a class="navbar-brand" href="#">Gestão de Equipamentos</a>
+            <a class="navbar-brand" href="/">Gestão de Equipamentos</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -35,7 +35,7 @@
 
     @* Cabeçalho com o Título da Página Atual *@
     <header class="container my-4">
-        <h1>Título da Página</h1>
+        <h1>@ViewBag.Titulo</h1>
     </header>
 
     <hr />
