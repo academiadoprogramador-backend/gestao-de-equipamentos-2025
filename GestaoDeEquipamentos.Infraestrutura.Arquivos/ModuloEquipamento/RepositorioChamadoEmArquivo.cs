@@ -1,5 +1,4 @@
-﻿using GestaoDeEquipamentos.Dominio.ModuloChamado;
-using GestaoDeEquipamentos.Dominio.ModuloEquipamento;
+﻿using GestaoDeEquipamentos.Dominio.ModuloEquipamento;
 using GestaoDeEquipamentos.Infraestrutura.Arquivos.Compartilhado;
 using GestaoDeEquipamentos.Infraestrutura.Compartilhado;
 

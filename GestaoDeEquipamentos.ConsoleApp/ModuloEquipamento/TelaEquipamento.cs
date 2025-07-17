@@ -2,8 +2,6 @@
 using GestaoDeEquipamentos.Dominio.ModuloEquipamento;
 using GestaoDeEquipamentos.Dominio.ModuloFabricante;
 using GestaoDeEquipamentos.Infraestrutura.Arquivos.ModuloFabricante;
-using GestaoDeEquipamentos.Infraestrutura.ModuloEquipamento;
-using GestaoDeEquipamentos.Infraestrutura.ModuloFabricante;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 
