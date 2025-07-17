@@ -57,4 +57,59 @@ public class EquipamentoController : Controller
 
         return RedirectToAction(nameof(Index));
     }
+
+    public IActionResult Editar(int id)
+    {
+        Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(id);
+
+        List<Fabricante> fabricantes = repositorioFabricante.SelecionarRegistros();
+
+        EditarEquipamentoViewModel editarVm = new EditarEquipamentoViewModel(
+            equipamentoSelecionado.Id,
+            equipamentoSelecionado.Nome,
+            equipamentoSelecionado.PrecoAquisicao,
+            equipamentoSelecionado.DataFabricacao,
+            equipamentoSelecionado.Fabricante.Id,
+            fabricantes
+        );
+
+        return View(editarVm);
+    }
+
+    [HttpPost]
+    public IActionResult Editar(int id, EditarEquipamentoViewModel editarVm)
+    {
+        Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(editarVm.FabricanteId);
+
+        Equipamento equipamentoEditado = new Equipamento(
+            editarVm.Nome,
+            editarVm.PrecoAquisicao,
+            editarVm.DataFabricacao,
+            fabricanteSelecionado
+        );
+
+        repositorioEquipamento.EditarRegistro(id, equipamentoEditado);
+
+        return RedirectToAction(nameof(Index));
+    }
+
+    public IActionResult Excluir(int id)
+    {
+        Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(id);
+
+        ExcluirEquipamentoViewModel excluirVm = new ExcluirEquipamentoViewModel(
+            equipamentoSelecionado.Id,
+            equipamentoSelecionado.Nome
+        );
+
+        return View(excluirVm);
+    }
+
+    [HttpPost]
+    public IActionResult ExcluirConfirmado(int id)
+    {
+        repositorioEquipamento.ExcluirRegistro(id);
+
+        return RedirectToAction(nameof(Index));
+    }
 }

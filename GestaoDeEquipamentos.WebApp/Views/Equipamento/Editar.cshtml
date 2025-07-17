@@ -1,13 +1,13 @@
 ﻿@using GestaoDeEquipamentos.WebApp.Models
 @{
     Layout = "_Layout";
-    ViewBag.Titulo = "Cadastro de Equipamento";
+    ViewBag.Titulo = "Edição de Equipamento";
 }
 
-@model CadastrarEquipamentoViewModel;
+@model EditarEquipamentoViewModel;
 
 <div class="row justify-content-center">
-    <form class="col-6" action="/Equipamento/Cadastrar" method="post">
+    <form class="col-6" action="/Equipamento/Editar/@Model.Id" method="post">
         <div class="mb-3">
             <label for="Nome" class="form-label">Nome</label>
             <input class="form-control" name="Nome" value="@Model.Nome">
@@ -20,7 +20,7 @@
 
         <div class="mb-3">
             <label for="DataFabricacao" class="form-label">Data de Fabricação</label>
-            <input class="form-control" type="date" name="DataFabricacao" value="@Model.DataFabricacao">
+            <input class="form-control" type="date" name="DataFabricacao" value="@Model.DataFabricacao.ToString("yyyy-MM-dd")">
         </div>
 
         <div class="mb-3">
